@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain and Hosting Pricing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .pricing-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        .pricing-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+        .pricing-item:last-child {
+            margin-bottom: 0;
+        }
+        .buy-button {
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .buy-button:hover {
+            background-color: #0b7dda;
+        }
+        .promo-box {
+            position: relative;
+            background-color: #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .promo-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .promo-text {
+            font-size: 24px;
+        }
+        .buy-button-promo {
+            background-color: #fff;
+            color: #4caf50;
+            border: 2px solid #4caf50;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .buy-button-promo:hover {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .select-container {
+            margin-bottom: 20px;
+        }
+        .select-field {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+        .details-container {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .details-container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <h2>Domain and Hosting Pricing</h2>
+        
+        <div class="pricing-item">
+            <h3>Choose Your Domain Plan</h3>
+            <div class="select-container">
+                <select id="domainSelect" class="select-field" onchange="showDetailsForm()">
+                    <option value="">Select a domain plan</option>
+                    <option value=".com - ₹750 for 1 year">.com Domain - ₹850 for 1 year</option>
+                    <option value=".com - ₹75 for 1 month">.com Domain - ₹179 for 1 month</option>
+                    <option value=".net - ₹900 for 1 year">.in Domain - ₹650 for 1 year</option>
+                    <option value=".net - ₹90 for 1 month">.in Domain - ₹149 for 1 month</option>
+                    <option value=".org - ₹1100 for 1 year">.org Domain - ₹1100 for 1 year</option>
+                    <option value=".org - ₹110 for 1 month">.org Domain - ₹210 for 1 month</option>
+                </select>
+            </div>
+            <div class="details-container" id="detailsForm">
+                <input type="text" id="clientName" placeholder="Enter your name">
+                <input type="text" id="clientContact" placeholder="Enter your contact number">
+                <input type="email" id="clientEmail" placeholder="Enter your email">
+                <button class="buy-button" onclick="buyDomain()">Submit Details & Buy Domain</button>
+            </div>
+        </div>
+        
+        <div class="promo-box">
+            <div class="promo-content">
+                <div class="promo-text">.com Domain with Free Hosting - Only ₹899 for 1 Year! 😳💥</div>
+            </div>
+            <a href="https://ssybrand.github.io/Donation-sattu-technologies-/" class="buy-button-promo" onclick="buyPromo()">Buy Now</a>
+        </div>
+    </div>
+
+    <script>
+        function showDetailsForm() {
+            var domainSelect = document.getElementById('domainSelect');
+            var detailsForm = document.getElementById('detailsForm');
+            if (domainSelect.value) {
+                detailsForm.style.display = 'block';
+            } else {
+                detailsForm.style.display = 'none';
+            }
+        }
+
+        function buyDomain() {
+            var domainSelect = document.getElementById('domainSelect');
+            var selectedOption = domainSelect.options[domainSelect.selectedIndex].text;
+
+            var clientName = document.getElementById('clientName').value.trim();
+            var clientContact = document.getElementById('clientContact').value.trim();
+            var clientEmail = document.getElementById('clientEmail').value.trim();
+
+            if (clientName && clientContact && clientEmail) {
+                // Send email with selected domain details and client info
+                sendEmail(selectedOption, clientName, clientContact, clientEmail);
+
+                // Redirect to payment page after sending email
+                setTimeout(function() {
+                    window.location.href = 'https://ssybrand.github.io/Donation-sattu-technologies-/'; // Change this to your actual payment page URL
+                }, 1000);
+            } else {
+                alert('Please fill in all the details.');
+            }
+        }
+
+        function buyPromo() {
+            var promoDetails = '.com Domain with Free Hosting - Only ₹899 for 1 Year!';
+            var clientName = prompt('Enter your name:');
+            var clientContact = prompt('Enter your contact number:');
+            var clientEmail = prompt('Enter your email:');
+
+            if (clientName && clientContact && clientEmail) {
+                // Send email with promo details and client info
+                sendEmail(promoDetails, clientName, clientContact, clientEmail);
+
+                // Redirect to payment page after sending email
+                setTimeout(function() {
+                    window.location.href = 'payment-page.html'; // Change this to your actual payment page URL
+                }, 1000);
+            } else {
+                alert('Please provide all the details.');
+            }
+        }
+
+        function sendEmail(details, name, contact, email) {
+            var emailBody = `Order Details: ${details}\n\nClient Name: ${name}\nContact Number: ${contact}\nEmail: ${email}`;
+            var mailtoLink = `mailto:ssybrand58@gmail.com?subject=Domain Order from sattu technologie&body=${encodeURIComponent(emailBody)}`;
+
+            // Open the default mail client with pre-filled details
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
